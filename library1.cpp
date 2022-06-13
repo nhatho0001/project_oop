@@ -5,6 +5,17 @@ UintN::UintN(const Uint1& a) {
 UintN::UintN(const Uint2& a) {
 	arr_number = a.get_value();
 }
+
+UintN::UintN(const int& number) {
+	int a = number;
+	arr_number;
+	while (a > 0) {
+		arr_number = char(a % 10 + '0') + arr_number;
+		a /= 10;
+	}
+	if (arr_number == "")arr_number = "0";
+	setup();
+}
 void UintN::output()const {
 	cout << arr_number << endl;
 }
@@ -15,7 +26,6 @@ bool UintN::test()const {
 	}
 	return true;
 }
-
 
 void UintN::setup() {
 	int N = arr_number.length();
@@ -29,16 +39,6 @@ void UintN::setup() {
 int UintN::Length()const {
 	return arr_number.length();
 }
-UintN::UintN(const int& number) {
-	int a = number;
-	arr_number;
-	while (a > 0) {
-		arr_number = char(a % 10 + '0') + arr_number;
-		a /= 10;
-	}
-	if (arr_number == "")arr_number = "0";
-}
-
 
 void UintN::input() {
 	do {
@@ -48,16 +48,21 @@ void UintN::input() {
 	setup();
 }
 
-
 bool UintN::prime() const {
-	string d = "2";
-	UintN i(d);
+	if (*this <= 3) {
+		return *this > 1;
+	}
+	else {
+		if (*this % 2 == 0 || *this % 3 == 0)return false;
+	}
+	UintN i("5");
 	while (i * i <= *this) {
-		if (*this % i == 0)return false;
-		i += 1;
+		if (*this % i == 0 || *this % (i+2)==0)return false;
+		i += 6;
 	}
 	return true;
 }
+
 UintN prime_nearst(const UintN& a, const UintN& b) {
 	UintN max = a;
 	if (b > max) max = b;
@@ -68,12 +73,14 @@ UintN prime_nearst(const UintN& a, const UintN& b) {
 }
 
 Uint1::Uint1(const int& N) {
-	int T = N;
-	arr_number.erase();
-	for (int i = 0; T > 0;i++) {
-		arr_number = char(T % 10 + '0')+arr_number;
-		T /= 10;
+	int a = N;
+	arr_number;
+	while (a > 0) {
+		arr_number = char(a % 10 + '0') + arr_number;
+		a /= 10;
 	}
+	if (arr_number == "")arr_number = "0";
+	setup();
 }
 void Uint1::setup() {
 	int N = arr_number.length();
@@ -86,12 +93,14 @@ void Uint1::setup() {
 }
 
 Uint2::Uint2(const int& N) {
-	int T = N;
-	arr_number.erase();
-	for (int i = 0; T > 0;i++) {
-		arr_number = char(T % 10 + '0') + arr_number;
-		T /= 10;
+	int a = N;
+	arr_number;
+	while (a > 0) {
+		arr_number = char(a % 10 + '0') + arr_number;
+		a /= 10;
 	}
+	if (arr_number == "")arr_number = "0";
+	setup();
 }
 
 void Uint2::setup() {

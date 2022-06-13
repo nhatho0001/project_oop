@@ -112,11 +112,16 @@ UintN & operator /= (UintN& a, const UintN& b) {
 	UintN T(0);
 	UintN R(0);
 	UintN rd=a;
-	while (rd>=b) {
+	while (a.Length()>0) {
 		while (T < b) {
 			T = T*10 + char(a.arr_number[0] - '0');
 			a.arr_number.erase(0, 1);
 			R *= 10;
+			if (a.Length() == 0&& T<b) {
+				a = R;
+				a.setup();
+				return a;
+			}
 		}
 		while (true) {
 			if (b * int((head + tail) / 2) > T) { 

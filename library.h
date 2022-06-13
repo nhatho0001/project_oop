@@ -67,8 +67,4 @@ public:
 };
 UintN prime_nearst(const UintN& a, const UintN& b);
 
-
-
-
-
 #endif // !library.h
