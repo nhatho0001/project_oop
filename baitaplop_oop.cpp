@@ -14,23 +14,28 @@ int main() {
 		{
 		case 1: {
 			a[i] = new Uint1();
+			a[i]->enter_memory();
 			cout << "enter value : ";
 			cin >> *a[i];
 			break;
 		}
 		case 2: {
 			a[i] = new Uint2();
+			a[i]->enter_memory();
 			cout << "enter value : ";
 			cin >> *a[i];
 			break;
 		}
 		default: {
 			a[i] = new UintN();
+			a[i]->enter_memory();
 			cout << "enter value : ";
 			cin >> *a[i];
 			break;}
 		}
 	}
+	cout << *a[0] << endl;
+	cout << *a[1] << endl;
 	cout << "number1 + number2 = " << *a[0] + *a[1] << endl;
 	cout << "number1 - number2 = " << *a[0] - *a[1] << endl;
 	cout << "number1 * number2 = " << *a[0] * (*a[1]) << endl;

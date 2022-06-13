@@ -16,6 +16,11 @@ UintN::UintN(const int& number) {
 	if (arr_number == "")arr_number = "0";
 	setup();
 }
+
+void UintN::enter_memory(){
+	cout << "enter memory area : ";
+	cin >> memory;
+}
 void UintN::output()const {
 	cout << arr_number << endl;
 }
@@ -71,8 +76,23 @@ UintN prime_nearst(const UintN& a, const UintN& b) {
 	while (!max.prime())max += 2;
 	return max;
 }
-
+void Uint1::setup() {
+	enter_memory();
+	UintN T("1");
+	int N = arr_number.length();
+	int j = 0;
+	for (int i = 0; arr_number[i] == '0' && i < N - 1;i++) {
+		j++;
+	}
+	arr_number.erase(arr_number.begin(), arr_number.begin() + j);
+	for (int i = 0; i < memory * 4;i++) {
+		T *= 256;
+	}
+	if (*this > T)arr_number.erase(T.Length(), Length());
+	if (*this > T)arr_number.erase(Length() - 1, Length());
+}
 Uint1::Uint1(const int& N) {
+	enter_memory();
 	int a = N;
 	arr_number;
 	while (a > 0) {
@@ -81,18 +101,10 @@ Uint1::Uint1(const int& N) {
 	}
 	if (arr_number == "")arr_number = "0";
 	setup();
-}
-void Uint1::setup() {
-	int N = arr_number.length();
-	int j = 0;
-	for (int i = 0; arr_number[i] == '0' && i < N - 1;i++) {
-		j++;
-	}
-	arr_number.erase(arr_number.begin(), arr_number.begin() + j);
-	if (arr_number.length() > max)arr_number.erase(max, arr_number.length());
 }
 
 Uint2::Uint2(const int& N) {
+	enter_memory();
 	int a = N;
 	arr_number;
 	while (a > 0) {
@@ -103,12 +115,19 @@ Uint2::Uint2(const int& N) {
 	setup();
 }
 
+
 void Uint2::setup() {
+	enter_memory();
+	UintN T("1");
 	int N = arr_number.length();
 	int j = 0;
 	for (int i = 0; arr_number[i] == '0' && i < N - 1;i++) {
 		j++;
 	}
 	arr_number.erase(arr_number.begin(), arr_number.begin() + j);
-	if (arr_number.length() > max)arr_number.erase(max, arr_number.length());
+	for (int i = 0; i < memory * 4;i++) {
+		T *= 256;
+	}
+	if (*this > T)arr_number.erase(T.Length(), Length());
+	if (*this > T)arr_number.erase(Length() - 1, Length());
 }

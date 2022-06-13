@@ -10,6 +10,9 @@ class Uint2;
 class UintN {
 private:
 	string arr_number;
+protected:
+	int memory;
+	
 public:
 	UintN(){};
 	UintN(const string d) : arr_number(d) {};
@@ -17,13 +20,14 @@ public:
 	UintN(const Uint1& a);
 	UintN(const Uint2& a);
 	~UintN(){}
+	virtual void enter_memory();
+	virtual void setup();
 	string get_value() const { return arr_number; }
 	void input();
 	void output()const;
-	virtual void setup();
 	int Length() const;
 	bool prime()const;
-	virtual bool test() const;
+	bool test() const;
 	UintN& operator = (const UintN& a);
 	friend UintN& operator += (UintN& a, const UintN& b);
 	friend UintN operator + (const UintN& a , const UintN& b);
@@ -46,23 +50,22 @@ public:
 class Uint1:public UintN {
 private :
 	string arr_number;
-	const int max = 10;
 public:
-	Uint1() {};
-	Uint1(const string d) :arr_number(d) {};
+	Uint1() { enter_memory(); };
+	Uint1(const string d) :arr_number(d) { enter_memory();setup(); };
 	Uint1(const int&n);
+	void enter_memory() { memory = 1; }
 	void setup();
-
 };
 
 class Uint2 :public UintN {
 private:
 	string arr_number;
-	const int max = 15;
 public:
 	Uint2() {};
-	Uint2(const string d) :arr_number(d) {};
+	Uint2(const string d) :arr_number(d) { enter_memory(); setup(); };
 	Uint2(const int& n);
+	void enter_memory() { memory = 2; };
 	void setup();
 };
 UintN prime_nearst(const UintN& a, const UintN& b);
