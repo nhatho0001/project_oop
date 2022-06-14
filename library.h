@@ -42,6 +42,7 @@ public:
 	friend UintN& operator %= (UintN& a, const UintN& b);
 	friend UintN operator % (const UintN& a , const UintN& b);
 	friend bool operator == (const UintN& a, const UintN& b);
+	friend bool operator != (const UintN& a, const UintN& b);
 	friend bool operator > (const UintN& a, const UintN& b);
 	friend bool operator < (const UintN& a , const UintN& b);
 	friend bool operator >= (const UintN& a, const UintN& b);
@@ -65,5 +66,8 @@ public:
 	void enter_memory() { memory = 2; };
 };
 UintN prime_nearst(const UintN& a, const UintN& b);
+UintN mulmod(UintN a, UintN b, UintN mod);
+UintN modulo(UintN base, UintN exponent, UintN mod);
+bool Miller(UintN p, UintN iteration);
 
 #endif // !library.h

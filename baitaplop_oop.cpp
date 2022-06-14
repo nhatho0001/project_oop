@@ -17,6 +17,7 @@ int main() {
 			a[i]->enter_memory();
 			cout << "enter value : ";
 			cin >> *a[i];
+			a[i]->setup_value();
 			break;
 		}
 		case 2: {
@@ -24,6 +25,7 @@ int main() {
 			a[i]->enter_memory();
 			cout << "enter value : ";
 			cin >> *a[i];
+			a[i]->setup_value();
 			break;
 		}
 		default: {
@@ -31,6 +33,7 @@ int main() {
 			a[i]->enter_memory();
 			cout << "enter value : ";
 			cin >> *a[i];
+			a[i]->setup_value();
 			break;}
 		}
 	}
@@ -45,7 +48,7 @@ int main() {
 	else cout << "number1 is not prime" << endl;
 	if (a[1]->prime())cout << "number2 is prime" << endl;
 	else cout << "number2 is not prime" << endl;
-	//cout << "Value prime > number1 and number2 : " << prime_nearst(*a[0], *a[1]) << endl;
+	cout << "Value prime > number1 and number2 : " << prime_nearst(*a[0], *a[1]) << endl;
 	delete a[0];
 	delete a[1];
 	return 0;

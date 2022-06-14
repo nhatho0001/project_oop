@@ -63,18 +63,8 @@ void UintN::input() {
 }
 
 bool UintN::prime() const {
-	if (*this <= 3) {
-		return *this > 1;
-	}
-	else {
-		if (*this % 2 == 0 || *this % 3 == 0)return false;
-	}
-	UintN i("5");
-	while (i * i <= *this) {
-		if (*this % i == 0 || *this % (i+2)==0)return false;
-		i += 6;
-	}
-	return true;
+	if (Miller(*this, 5))return true;
+	return false;
 }
 
 UintN prime_nearst(const UintN& a, const UintN& b) {
@@ -119,4 +109,69 @@ Uint2::Uint2(const int& N) {
 	if (arr_number == "")arr_number = "0";
 	setup();
 	setup_value();
+}
+UintN mulmod(UintN a,UintN b, UintN mod)
+{
+	UintN x = 0, y = a % mod;
+	while (b > 0)
+	{
+		if (b % 2 == 1)
+		{
+			x = (x + y) % mod;
+		}
+		y = (y * 2) % mod;
+		b /= 2;
+	}
+	return x % mod;
+}
+/*
+ * modular exponentiation
+ */
+UintN modulo(UintN base,UintN exponent, UintN mod)
+{
+	UintN x = 1;
+	UintN y = base;
+	while (exponent > 0)
+	{
+		if (exponent % 2 == 1)
+			x = (x * y) % mod;
+		y = (y * y) % mod;
+		exponent = exponent / 2;
+	}
+	return x % mod;
+}
+
+/*
+ * Miller-Rabin primality test, iteration signifies the accuracy
+ */
+bool Miller(UintN p, UintN iteration)
+{
+	if (p < 2)
+	{
+		return false;
+	}
+	if (p != 2 && p % 2 == 0)
+	{
+		return false;
+	}
+	UintN s = p - 1;
+	while (s % 2 == 0)
+	{
+		s /= 2;
+	}
+	for (int i = 0; i < iteration; i++)
+	{
+		UintN a = rand() % (p - 1) + 1, temp = s;
+		UintN mod = modulo(a, temp, p);
+		while (temp != p - 1 && mod != 1 && mod != p - 1)
+		{
+			mod = mulmod(mod, mod, p);
+			temp *= 2;
+		}
+		if (mod != p - 1 && temp % 2 == 0)
+		{
+			return false;
+		}
+	}
+	return true;
 }

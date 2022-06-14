@@ -24,7 +24,6 @@ UintN & operator +=(UintN& a, const UintN& b) {
 		number2--;
 	}
 	if (rd > 0)a.arr_number = '1' + a.arr_number;
-	a.setup();
 	return a;
 }
 UintN operator + (const UintN & a, const UintN & b) {
@@ -172,6 +171,10 @@ bool  operator==(const UintN& a, const UintN& b) {
 		return true;
 	}return false;
 }
+bool operator != (const UintN& a, const UintN& b) {
+	if (a == b)return false;
+	return true;
+}
 bool operator > (const UintN& a, const UintN& b) {
 	if (a.arr_number.length() > b.arr_number.length())return true;
 	if (a.arr_number.length() < b.arr_number.length())return false;
@@ -202,6 +205,6 @@ istream& operator >> (istream& i, UintN & a) {
 		i >> a.arr_number;
 	} while (!a.test());
 	a.setup();
-	a.setup_value();
+	//a.setup_value();
 	return i;
 }
