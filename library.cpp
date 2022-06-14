@@ -198,15 +198,10 @@ ostream& operator << (ostream&o, const UintN& a) {
 	return o;
 }
 istream& operator >> (istream& i, UintN & a) {
-	UintN T("1");
 	do {
 		i >> a.arr_number;
 	} while (!a.test());
-	for (int i = 0; i < a.memory*4;i++) {
-		T *= 256;
-	}
-	if (a > T)a.arr_number.erase(T.Length(), a.Length());
-	if (a > T)a.arr_number.erase(a.Length() - 1, a.Length());
 	a.setup();
+	a.setup_value();
 	return i;
 }

@@ -8,11 +8,11 @@ using namespace std;
 class Uint1;
 class Uint2;
 class UintN {
-private:
-	string arr_number;
-protected:
-	int memory;
+//private:
 	
+protected:
+	string arr_number;
+	int memory;
 public:
 	UintN(){};
 	UintN(const string d) : arr_number(d) {};
@@ -21,8 +21,10 @@ public:
 	UintN(const Uint2& a);
 	~UintN(){}
 	virtual void enter_memory();
-	virtual void setup();
+	void setup();
+	void setup_value();
 	string get_value() const { return arr_number; }
+	int get_memory()const { return memory; }
 	void input();
 	void output()const;
 	int Length() const;
@@ -48,25 +50,19 @@ public:
 	friend istream& operator >> (istream& i,UintN& a);
 };
 class Uint1:public UintN {
-private :
-	string arr_number;
 public:
 	Uint1() { enter_memory(); };
-	Uint1(const string d) :arr_number(d) { enter_memory();setup(); };
+	Uint1(const string d);
 	Uint1(const int&n);
 	void enter_memory() { memory = 1; }
-	void setup();
 };
 
 class Uint2 :public UintN {
-private:
-	string arr_number;
 public:
-	Uint2() {};
-	Uint2(const string d) :arr_number(d) { enter_memory(); setup(); };
+	Uint2() { enter_memory(); };
+	Uint2(const string d);
 	Uint2(const int& n);
 	void enter_memory() { memory = 2; };
-	void setup();
 };
 UintN prime_nearst(const UintN& a, const UintN& b);
 

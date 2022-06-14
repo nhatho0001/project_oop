@@ -1,9 +1,11 @@
 #include"library.h"
 UintN::UintN(const Uint1& a) {
 	arr_number = a.get_value();
+	memory = a.get_memory();
 }
 UintN::UintN(const Uint2& a) {
 	arr_number = a.get_value();
+	memory = a.get_memory();
 }
 
 UintN::UintN(const int& number) {
@@ -40,7 +42,14 @@ void UintN::setup() {
 	}
 	arr_number.erase(arr_number.begin(), arr_number.begin() + j);
 }
-
+void UintN::setup_value() {
+	UintN T("1");
+	for (int i = 0; i < get_memory() * 4;i++) {
+		T *= 256;
+	}
+	if (*this > T)arr_number.erase(T.Length(), Length());
+	if (*this > T)arr_number.erase(Length() - 1, Length());
+}
 int UintN::Length()const {
 	return arr_number.length();
 }
@@ -76,20 +85,10 @@ UintN prime_nearst(const UintN& a, const UintN& b) {
 	while (!max.prime())max += 2;
 	return max;
 }
-void Uint1::setup() {
-	enter_memory();
-	UintN T("1");
-	int N = arr_number.length();
-	int j = 0;
-	for (int i = 0; arr_number[i] == '0' && i < N - 1;i++) {
-		j++;
-	}
-	arr_number.erase(arr_number.begin(), arr_number.begin() + j);
-	for (int i = 0; i < memory * 4;i++) {
-		T *= 256;
-	}
-	if (*this > T)arr_number.erase(T.Length(), Length());
-	if (*this > T)arr_number.erase(Length() - 1, Length());
+Uint1::Uint1(const string d) {
+	arr_number = d;
+	setup();
+	setup_value();
 }
 Uint1::Uint1(const int& N) {
 	enter_memory();
@@ -101,8 +100,14 @@ Uint1::Uint1(const int& N) {
 	}
 	if (arr_number == "")arr_number = "0";
 	setup();
+	setup_value();
 }
 
+Uint2::Uint2(const string d) {
+	arr_number = d;
+	setup();
+	setup_value();
+}
 Uint2::Uint2(const int& N) {
 	enter_memory();
 	int a = N;
@@ -113,21 +118,5 @@ Uint2::Uint2(const int& N) {
 	}
 	if (arr_number == "")arr_number = "0";
 	setup();
-}
-
-
-void Uint2::setup() {
-	enter_memory();
-	UintN T("1");
-	int N = arr_number.length();
-	int j = 0;
-	for (int i = 0; arr_number[i] == '0' && i < N - 1;i++) {
-		j++;
-	}
-	arr_number.erase(arr_number.begin(), arr_number.begin() + j);
-	for (int i = 0; i < memory * 4;i++) {
-		T *= 256;
-	}
-	if (*this > T)arr_number.erase(T.Length(), Length());
-	if (*this > T)arr_number.erase(Length() - 1, Length());
+	setup_value();
 }
